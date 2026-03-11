@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Zagaynov — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-elevated: #111115;
+    --bg-card: #16161b;
+    --border: #222230;
+    --border-light: #2a2a3a;
+    --text: #e8e8ed;
+    --text-muted: #8888a0;
+    --text-dim: #55556a;
+    --accent: #6ee7b7;
+    --accent-dim: rgba(110, 231, 183, 0.1);
+    --accent-glow: rgba(110, 231, 183, 0.15);
+    --warm: #f0c674;
+    --radius: 10px;
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'Newsreader', Georgia, serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) var(--bg);
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 12, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  nav .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  nav .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav .logo span { color: var(--accent); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    transition: color 0.25s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 7rem 2rem 4rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  /* ── HERO ── */
+  #home {
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+    position: relative;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-family: var(--font-display);
+    font-size: 3.8rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+  }
+  .hero-text h1 .line { display: block; }
+  .hero-text h1 .accent-line { color: var(--accent); }
+
+  .hero-text .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 460px;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 24px var(--accent-glow);
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-muted);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .terminal {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .terminal-dot:nth-child(1) { background: #ff5f56; }
+  .terminal-dot:nth-child(2) { background: #ffbd2e; }
+  .terminal-dot:nth-child(3) { background: #27c93f; }
+  .terminal-bar span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-left: auto;
+  }
+  .terminal-body {
+    padding: 1.2rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+    min-height: 200px;
+  }
+  .terminal-body .prompt { color: var(--accent); }
+  .terminal-body .output { color: var(--text-dim); }
+  .terminal-body .highlight { color: var(--warm); }
+  .cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: var(--accent);
+    animation: blink 1s steps(1) infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; } 50% { opacity: 0; }
+  }
+
+  /* ── ABOUT ── */
+  #about { padding-bottom: 2rem; }
+  .about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+  }
+  .about-prose {
+    max-width: 620px;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+  }
+  .about-prose p + p { margin-top: 1.2rem; }
+
+  .about-aside {
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+  }
+  .about-aside h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+  .about-aside ul {
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  .about-aside li {
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .about-aside li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .about-aside ul + h3 { margin-top: 1.8rem; }
+
+  /* ── SKILLS ── */
+  #skills { padding-top: 4rem; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .skill-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-card h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skill-tag {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.9rem;
+    background: var(--accent-dim);
+    border: 1px solid rgba(110, 231, 183, 0.12);
+    border-radius: 6px;
+    color: var(--text);
+    transition: all 0.25s;
+  }
+  .skill-tag:hover {
+    background: rgba(110, 231, 183, 0.18);
+    border-color: rgba(110, 231, 183, 0.3);
+  }
+
+  /* ── PROJECTS ── */
+  #projects { padding-top: 4rem; }
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: var(--border-light);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+  .project-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .project-desc {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    margin-bottom: 1.2rem;
+    max-width: 680px;
+    line-height: 1.8;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .project-tech span {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-dim);
+  }
+
+  .project-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .project-detail {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--border);
+  }
+  .project-detail strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--text);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.7rem; }
+  .project-link::after { content: '→'; }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+  .contact-inner {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .contact-text {
+    color: var(--text-muted);
+    max-width: 400px;
+    font-size: 1rem;
+  }
+  .contact-text p + p { margin-top: 1rem; }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s;
+    color: var(--text);
+  }
+  .contact-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .contact-item .label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+  .contact-item .value {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-visual { justify-content: flex-start; }
+    .terminal { max-width: 100%; }
+    .about-content { grid-template-columns: 1fr; }
+    .about-aside { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 2rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .project-details { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    h2 { font-size: 2rem; }
+  }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    nav ul.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      background: rgba(10, 10, 12, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      gap: 1rem;
+    }
+    .hamburger { display: flex; }
+    .hero-text h1 { font-size: 2.2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    section { padding: 5rem 1.25rem 3rem; }
+    .contact-inner { padding: 2rem; }
+    .project-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="logo">daniel<span>.</span>z</a>
+    <button class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+      <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-grid">
+    <div class="hero-text fade-in">
+      <div class="section-label">Portfolio</div>
+      <h1>
+        <span class="line">Daniel</span>
+        <span class="line">Zagaynov</span>
+        <span class="line accent-line">Software Engineer</span>
+      </h1>
+      <p class="subtitle">
+        Computer Science student at UC Davis focused on building reliable systems and solving complex problems. Interested in backend engineering, algorithm design, and software that works at scale.
+      </p>
+      <div class="hero-links">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in" style="transition-delay: 0.15s">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <span>~/portfolio</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div><span class="prompt">$</span> cat about.txt</div>
+          <div class="output">CS @ UC Davis</div>
+          <div class="output">Seeking SWE internships</div>
+          <br>
+          <div><span class="prompt">$</span> ls skills/</div>
+          <div class="highlight">C  C++  Python  JavaScript</div>
+          <div class="highlight">Git  Linux  APIs  Web Dev</div>
+          <br>
+          <div><span class="prompt">$</span> ls projects/</div>
+          <div class="output">poker-bot/</div>
+          <div class="output">composit-webapp/</div>
+          <div class="output">pathfinder-engine/</div>
+          <div class="output">cache-simulator/</div>
+          <br>
+          <div><span class="prompt">$</span> <span class="cursor-blink"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="fade-in">
+    <div class="section-label">About</div>
+    <h2>Background</h2>
+  </div>
+  <div class="about-content fade-in" style="transition-delay: 0.1s">
+    <div class="about-prose">
+      <p>
+        I'm a Computer Science major at the University of California, Davis with a focus on software engineering and systems development. I'm drawn to problems that require both analytical thinking and practical implementation — figuring out the right algorithm, then building something that actually works.
+      </p>
+      <p>
+        My coursework covers data structures, algorithms, operating systems, and software design. Outside of class, I apply these concepts to projects ranging from game theory bots to full-stack web applications.
+      </p>
+      <p>
+        I'm looking for internship opportunities at companies where I can contribute to real engineering challenges, learn from experienced teams, and grow as a developer. I work well with ambiguity, pick up new tools quickly, and care about writing clean, maintainable code.
+      </p>
+    </div>
+    <div class="about-aside">
+      <h3>Currently</h3>
+      <ul>
+        <li>CS student at UC Davis</li>
+        <li>Seeking SWE internships</li>
+        <li>Building side projects</li>
+      </ul>
+      <h3>Interests</h3>
+      <ul>
+        <li>Backend systems</li>
+        <li>Algorithm design</li>
+        <li>Developer tools</li>
+        <li>Performance optimization</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-label">Skills</div>
+    <h2>Technical Toolkit</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in" style="transition-delay: 0.08s">
+      <h3>Technologies &amp; Tools</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in" style="transition-delay: 0.16s">
+      <h3>Concepts</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Algorithms</span>
+        <span class="skill-tag">Data Structures</span>
+        <span class="skill-tag">Software Design</span>
+        <span class="skill-tag">Problem Solving</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-label">Projects</div>
+    <h2>Selected Work</h2>
+    <p style="color: var(--text-muted); max-width: 560px; margin-bottom: 0.5rem;">
+      Each project represents a distinct technical challenge — from probability modeling to full-stack development to systems-level optimization.
+    </p>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- PROJECT 1 — Poker Bot -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <h3>Poker Bot</h3>
+        <span class="project-num">01</span>
+      </div>
+      <p class="project-desc">
+        An automated poker-playing agent designed to achieve positive expected value against opponents. The bot evaluates hand strength, models opponent tendencies, and makes mathematically grounded betting decisions using probability theory and game strategy heuristics.
+      </p>
+      <div class="project-tech">
+        <span>Python</span>
+        <span>Probability Theory</span>
+        <span>Decision Logic</span>
+        <span>Game Strategy</span>
+      </div>
+      <div class="project-details">
+        <div class="project-detail">
+          <strong>Problem</strong>
+          Poker requires real-time decision-making under uncertainty — evaluating incomplete information, estimating opponent ranges, and choosing actions that maximize long-term profit.
+        </div>
+        <div class="project-detail">
+          <strong>What I Built</strong>
+          A decision engine that calculates hand equity, pot odds, and expected value for each action. The bot adjusts its play based on position, bet sizing, and modeled opponent behavior.
+        </div>
+      </div>
+      <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <!-- PROJECT 2 — Composit / Poseidon Aero -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <h3>Composit — poseidonaero.com</h3>
+        <span class="project-num">02</span>
+      </div>
+      <p class="project-desc">
+        Contributed to Composit, a web-based project associated with Poseidon Aero. Worked on building and refining frontend and backend components for the company's web platform, handling real-world development workflows including version control, code review, and deployment.
+      </p>
+      <div class="project-tech">
+        <span>JavaScript</span>
+        <span>Web Development</span>
+        <span>Git</span>
+        <span>APIs</span>
+      </div>
+      <div class="project-details">
+        <div class="project-detail">
+          <strong>Problem</strong>
+          The platform needed functional, reliable web components that serve both internal operations and external users — requiring clean architecture and maintainable code.
+        </div>
+        <div class="project-detail">
+          <strong>What I Built</strong>
+          Developed features across the application stack, working within professional development practices including branching workflows, testing, and collaborative code review.
+        </div>
+      </div>
+      <a href="https://poseidonaero.com" class="project-link" target="_blank" rel="noopener">View Live Site</a>
+    </div>
+
+    <!-- PROJECT 3 — Pathfinder Engine -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <h3>Pathfinder Engine</h3>
+        <span class="project-num">03</span>
+      </div>
+      <p class="project-desc">
+        A graph-based pathfinding visualizer that implements and benchmarks multiple search algorithms on dynamic grids. Users can place obstacles, set start and end points, and watch algorithms solve the shortest-path problem in real time.
+      </p>
+      <div class="project-tech">
+        <span>C++</span>
+        <span>Algorithms</span>
+        <span>Graph Theory</span>
+        <span>Data Structures</span>
+      </div>
+      <div class="project-details">
+        <div class="project-detail">
+          <strong>Problem</strong>
+          Understanding the tradeoffs between search algorithms — BFS, Dijkstra's, A* — requires seeing them operate on identical inputs and comparing their behavior and performance.
+        </div>
+        <div class="project-detail">
+          <strong>What I Built</strong>
+          An interactive engine that generates grids, runs multiple pathfinding algorithms, and outputs comparative metrics including nodes explored, path length, and execution time.
+        </div>
+      </div>
+      <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <!-- PROJECT 4 — Cache Simulator -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <h3>Cache Simulator</h3>
+        <span class="project-num">04</span>
+      </div>
+      <p class="project-desc">
+        A configurable CPU cache simulator that models direct-mapped, set-associative, and fully-associative caches. The tool processes memory access traces and reports hit rates, miss rates, and eviction patterns across different cache configurations.
+      </p>
+      <div class="project-tech">
+        <span>C</span>
+        <span>Systems Programming</span>
+        <span>Computer Architecture</span>
+        <span>Performance Analysis</span>
+      </div>
+      <div class="project-details">
+        <div class="project-detail">
+          <strong>Problem</strong>
+          Cache design decisions directly impact system performance. Comparing configurations requires a tool that accurately simulates memory hierarchy behavior under realistic workloads.
+        </div>
+        <div class="project-detail">
+          <strong>What I Built</strong>
+          A command-line simulator that accepts configurable parameters — cache size, block size, associativity, replacement policy — and processes trace files to output detailed performance statistics.
+        </div>
+      </div>
+      <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="fade-in">
+    <div class="section-label">Contact</div>
+    <h2>Let's Connect</h2>
+  </div>
+  <div class="contact-inner fade-in" style="transition-delay: 0.1s">
+    <div class="contact-text">
+      <p>
+        I'm actively looking for software engineering internships and open to opportunities where I can contribute to meaningful technical work.
+      </p>
+      <p>
+        If you're hiring or would like to discuss a potential role, I'd be glad to hear from you. I respond to all messages within 24 hours.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:dzagaynov@ucdavis.edu" class="contact-item">
+        <div>
+          <div class="label">Email</div>
+          <div class="value">dzagaynov@ucdavis.edu</div>
+        </div>
+      </a>
+      <a href="https://github.com/danielzagaynov" class="contact-item" target="_blank" rel="noopener">
+        <div>
+          <div class="label">GitHub</div>
+          <div class="value">github.com/danielzagaynov</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/danielzagaynov" class="contact-item" target="_blank" rel="noopener">
+        <div>
+          <div class="label">LinkedIn</div>
+          <div class="value">linkedin.com/in/danielzagaynov</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>&copy; 2026 Daniel Zagaynov &middot; Built from scratch</p>
+</footer>
+
+<script>
+  // Close mobile menu
+  function closeMenu() {
+    document.querySelector('nav ul').classList.remove('open');
+  }
+
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
