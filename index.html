@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniel Zagaynov — Software Engineer</title>
+<title>Daniel Zagaynov CS Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -93,7 +93,6 @@
   }
   nav a:hover { color: var(--accent); }
 
-  /* ── HAMBURGER ── */
   .hamburger {
     display: none;
     flex-direction: column;
@@ -112,7 +111,6 @@
     transition: 0.3s;
   }
 
-  /* ── SECTIONS ── */
   section {
     max-width: 1120px;
     margin: 0 auto;
@@ -152,7 +150,6 @@
   #home {
     padding-top: 10rem;
     padding-bottom: 6rem;
-    position: relative;
   }
 
   .hero-grid {
@@ -176,7 +173,7 @@
   .hero-text .subtitle {
     font-size: 1.05rem;
     color: var(--text-muted);
-    max-width: 460px;
+    max-width: 480px;
     margin-bottom: 2rem;
     line-height: 1.8;
   }
@@ -384,6 +381,75 @@
     border-color: rgba(110, 231, 183, 0.3);
   }
 
+  /* ── EXPERIENCE ── */
+  #experience { padding-top: 4rem; padding-bottom: 2rem; }
+  .experience-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .experience-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .exp-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .exp-header .exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .exp-role {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .exp-desc {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    max-width: 680px;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+  .exp-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .exp-highlight {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--border);
+    line-height: 1.6;
+  }
+
   /* ── PROJECTS ── */
   #projects { padding-top: 4rem; }
   .projects-list {
@@ -488,6 +554,7 @@
   }
   .project-link:hover { gap: 0.7rem; }
   .project-link::after { content: '→'; }
+  .project-link + .project-link { margin-left: 1.5rem; }
 
   /* ── CONTACT ── */
   #contact {
@@ -543,7 +610,6 @@
     font-size: 0.92rem;
   }
 
-  /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
     padding: 2rem;
@@ -553,7 +619,6 @@
     color: var(--text-dim);
   }
 
-  /* ── ANIMATIONS ── */
   .fade-in {
     opacity: 0;
     transform: translateY(24px);
@@ -565,7 +630,6 @@
     transform: translateY(0);
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
     .hero-text h1 { font-size: 2.8rem; }
@@ -575,6 +639,7 @@
     .about-aside { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 2rem; }
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .project-details { grid-template-columns: 1fr; }
+    .exp-highlights { grid-template-columns: 1fr; }
     .contact-inner { grid-template-columns: 1fr; }
     h2 { font-size: 2rem; }
   }
@@ -598,6 +663,7 @@
     section { padding: 5rem 1.25rem 3rem; }
     .contact-inner { padding: 2rem; }
     .project-card { padding: 1.5rem; }
+    .experience-card { padding: 1.5rem; }
   }
 </style>
 </head>
@@ -614,6 +680,7 @@
       <li><a href="#home" onclick="closeMenu()">Home</a></li>
       <li><a href="#about" onclick="closeMenu()">About</a></li>
       <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+      <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
       <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
       <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
     </ul>
@@ -628,10 +695,10 @@
       <h1>
         <span class="line">Daniel</span>
         <span class="line">Zagaynov</span>
-        <span class="line accent-line">Software Engineer</span>
+        <span class="line accent-line">CS Engineer</span>
       </h1>
       <p class="subtitle">
-        Computer Science student at UC Davis focused on building reliable systems and solving complex problems. Interested in backend engineering, algorithm design, and software that works at scale.
+        Computer Science Engineering student at UC Davis. I build software systems and get my hands dirty with hardware, from writing decision engines in Python to laying up composite airframes at an aerospace startup.
       </p>
       <div class="hero-links">
         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -646,19 +713,22 @@
           <div class="terminal-dot"></div>
           <span>~/portfolio</span>
         </div>
-        <div class="terminal-body" id="terminal-body">
+        <div class="terminal-body">
           <div><span class="prompt">$</span> cat about.txt</div>
-          <div class="output">CS @ UC Davis</div>
-          <div class="output">Seeking SWE internships</div>
+          <div class="output">CS Engineering @ UC Davis</div>
+          <div class="output">Software + Hardware</div>
           <br>
           <div><span class="prompt">$</span> ls skills/</div>
           <div class="highlight">C  C++  Python  JavaScript</div>
-          <div class="highlight">Git  Linux  APIs  Web Dev</div>
+          <div class="highlight">Git  Linux  Avionics  Composites</div>
+          <br>
+          <div><span class="prompt">$</span> ls experience/</div>
+          <div class="output">poseidon-aerospace/</div>
           <br>
           <div><span class="prompt">$</span> ls projects/</div>
           <div class="output">poker-bot/</div>
-          <div class="output">composit-webapp/</div>
-          <div class="output">pathfinder-engine/</div>
+          <div class="output">poseidonaero.com/</div>
+          <div class="output">insightable-app/</div>
           <div class="output">cache-simulator/</div>
           <br>
           <div><span class="prompt">$</span> <span class="cursor-blink"></span></div>
@@ -677,28 +747,31 @@
   <div class="about-content fade-in" style="transition-delay: 0.1s">
     <div class="about-prose">
       <p>
-        I'm a Computer Science major at the University of California, Davis with a focus on software engineering and systems development. I'm drawn to problems that require both analytical thinking and practical implementation — figuring out the right algorithm, then building something that actually works.
+        I'm a Computer Science Engineering major at the University of California, Davis. What sets me apart is that I work across the full spectrum, writing algorithms and shipping web applications, but also building physical systems with my hands. I think the best engineers understand both sides.
       </p>
       <p>
-        My coursework covers data structures, algorithms, operating systems, and software design. Outside of class, I apply these concepts to projects ranging from game theory bots to full-stack web applications.
+        I've interned at Poseidon Aerospace, where I contributed to avionics systems and composite manufacturing for autonomous cargo aircraft. That experience taught me how software decisions ripple into real-world constraints — weight, reliability, environmental conditions — in ways that pure software work rarely exposes.
       </p>
       <p>
-        I'm looking for internship opportunities at companies where I can contribute to real engineering challenges, learn from experienced teams, and grow as a developer. I work well with ambiguity, pick up new tools quickly, and care about writing clean, maintainable code.
+        On the software side, I build projects that tackle genuinely interesting problems: game theory bots, full-stack web platforms, and systems-level tools. I care about writing code that's clean, maintainable, and solves the right problem.
+      </p>
+      <p>
+        I'm looking for internships where I can bring this cross-disciplinary mindset to challenging engineering work, whether that's at a tech company, an aerospace firm, or anywhere in between.
       </p>
     </div>
     <div class="about-aside">
       <h3>Currently</h3>
       <ul>
-        <li>CS student at UC Davis</li>
+        <li>CS Engineering at UC Davis</li>
         <li>Seeking SWE internships</li>
         <li>Building side projects</li>
       </ul>
       <h3>Interests</h3>
       <ul>
-        <li>Backend systems</li>
+        <li>Software + hardware systems</li>
         <li>Algorithm design</li>
-        <li>Developer tools</li>
-        <li>Performance optimization</li>
+        <li>Aerospace engineering</li>
+        <li>Full-stack development</li>
       </ul>
     </div>
   </div>
@@ -731,13 +804,41 @@
       </div>
     </div>
     <div class="skill-card fade-in" style="transition-delay: 0.16s">
-      <h3>Concepts</h3>
+      <h3>Concepts &amp; Hardware</h3>
       <div class="skill-tags">
         <span class="skill-tag">Algorithms</span>
         <span class="skill-tag">Data Structures</span>
         <span class="skill-tag">Software Design</span>
-        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Avionics</span>
+        <span class="skill-tag">Composites</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="fade-in">
+    <div class="section-label">Experience</div>
+    <h2>Work Experience</h2>
+  </div>
+  <div class="experience-card fade-in" style="transition-delay: 0.1s">
+    <div class="exp-header">
+      <h3>Poseidon Aerospace</h3>
+      <span class="exp-period">Intern</span>
+    </div>
+    <div class="exp-role">Avionics &amp; Composite Manufacturing</div>
+    <p class="exp-desc">
+      Poseidon Aerospace builds autonomous unmanned cargo aircraft designed to move freight faster and cheaper than conventional air logistics. The company's platforms - Egret and Heron - are constructed with carbon fiber and aerospace-grade composites and operated by autonomous flight systems. The company has raised $11M in seed funding and operates out of California, Washington, and Maine.
+    </p>
+    <p class="exp-desc">
+      As an intern, I worked hands-on across avionics and composite manufacturing, contributing to the physical systems that make autonomous flight possible.
+    </p>
+    <div class="exp-highlights">
+      <div class="exp-highlight">Assisted with avionics integration and wiring for autonomous flight control systems on unmanned aircraft platforms.</div>
+      <div class="exp-highlight">Performed composite layup and fabrication for airframe components using carbon fiber and aerospace-grade materials.</div>
+      <div class="exp-highlight">Worked within a fast-paced startup environment alongside engineers from Amazon, L3Harris, and Lockheed Martin.</div>
+      <div class="exp-highlight">Gained direct exposure to the intersection of software systems (autopilot, sensor integration) and physical hardware constraints.</div>
     </div>
   </div>
 </section>
@@ -747,14 +848,14 @@
   <div class="fade-in">
     <div class="section-label">Projects</div>
     <h2>Selected Work</h2>
-    <p style="color: var(--text-muted); max-width: 560px; margin-bottom: 0.5rem;">
-      Each project represents a distinct technical challenge — from probability modeling to full-stack development to systems-level optimization.
+    <p style="color: var(--text-muted); max-width: 600px; margin-bottom: 0.5rem;">
+      Projects that span the stack from probability engines to production websites to systems-level tools.
     </p>
   </div>
 
   <div class="projects-list">
 
-    <!-- PROJECT 1 — Poker Bot -->
+    <!-- PROJECT 1  Poker Bot -->
     <div class="project-card fade-in">
       <div class="project-header">
         <h3>Poker Bot</h3>
@@ -772,7 +873,7 @@
       <div class="project-details">
         <div class="project-detail">
           <strong>Problem</strong>
-          Poker requires real-time decision-making under uncertainty — evaluating incomplete information, estimating opponent ranges, and choosing actions that maximize long-term profit.
+          Poker requires real-time decision-making under uncertainty. its evaluating incomplete information, estimating opponent ranges, and choosing actions that maximize long-term profit.
         </div>
         <div class="project-detail">
           <strong>What I Built</strong>
@@ -782,92 +883,62 @@
       <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
     </div>
 
-    <!-- PROJECT 2 — Composit / Poseidon Aero -->
+    <!-- PROJECT 2 — poseidonaero.com -->
     <div class="project-card fade-in">
       <div class="project-header">
-        <h3>Composit — poseidonaero.com</h3>
+        <h3>poseidonaero.com</h3>
         <span class="project-num">02</span>
       </div>
       <p class="project-desc">
-        Contributed to Composit, a web-based project associated with Poseidon Aero. Worked on building and refining frontend and backend components for the company's web platform, handling real-world development workflows including version control, code review, and deployment.
+        Designed and built the company website for Poseidon Aerospace, an autonomous cargo aircraft startup. The site serves as the company's public-facing platform for investors, defense and commercial partners, and recruiting efforts.
       </p>
       <div class="project-tech">
         <span>JavaScript</span>
         <span>Web Development</span>
-        <span>Git</span>
-        <span>APIs</span>
+        <span>UI / UX Design</span>
+        <span>Responsive Design</span>
       </div>
       <div class="project-details">
         <div class="project-detail">
           <strong>Problem</strong>
-          The platform needed functional, reliable web components that serve both internal operations and external users — requiring clean architecture and maintainable code.
+          A fast-moving aerospace startup needed a professional web presence that communicates credibility to investors, defense clients, and prospective hires, and needed it built quickly.
         </div>
         <div class="project-detail">
           <strong>What I Built</strong>
-          Developed features across the application stack, working within professional development practices including branching workflows, testing, and collaborative code review.
+          The full company website from scratch, handling design, development, and deployment. The site presents the company's aircraft platforms, commercial and defense use cases, and career opportunities.
         </div>
       </div>
       <a href="https://poseidonaero.com" class="project-link" target="_blank" rel="noopener">View Live Site</a>
     </div>
 
-    <!-- PROJECT 3 — Pathfinder Engine -->
+    <!-- PROJECT 3 — Insightable App -->
     <div class="project-card fade-in">
       <div class="project-header">
-        <h3>Pathfinder Engine</h3>
+        <h3>Insightable</h3>
         <span class="project-num">03</span>
       </div>
       <p class="project-desc">
-        A graph-based pathfinding visualizer that implements and benchmarks multiple search algorithms on dynamic grids. Users can place obstacles, set start and end points, and watch algorithms solve the shortest-path problem in real time.
+        A web application that transforms social media comment sections into organized, actionable insights for content creators. The platform uses AI to categorize discussions by topic, analyze audience sentiment, auto-generate reply suggestions, and detect scam accounts, turning noisy comment feeds into structured data.
       </p>
       <div class="project-tech">
-        <span>C++</span>
-        <span>Algorithms</span>
-        <span>Graph Theory</span>
-        <span>Data Structures</span>
+        <span>JavaScript</span>
+        <span>AI / NLP</span>
+        <span>APIs</span>
+        <span>Full-Stack</span>
       </div>
       <div class="project-details">
         <div class="project-detail">
           <strong>Problem</strong>
-          Understanding the tradeoffs between search algorithms — BFS, Dijkstra's, A* — requires seeing them operate on identical inputs and comparing their behavior and performance.
+          Content creators with large audiences can't meaningfully engage with thousands of comments. Valuable feedback, trends, and community signals get buried in noise.
         </div>
         <div class="project-detail">
           <strong>What I Built</strong>
-          An interactive engine that generates grids, runs multiple pathfinding algorithms, and outputs comparative metrics including nodes explored, path length, and execution time.
+          A platform that ingests comment data, clusters it by topic and sentiment, surfaces key insights, flags fraudulent accounts, and generates contextual reply suggestions, all through a clean creator dashboard.
         </div>
       </div>
-      <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+      <a href="https://www.insightable.app/" class="project-link" target="_blank" rel="noopener">View App</a>
     </div>
 
-    <!-- PROJECT 4 — Cache Simulator -->
-    <div class="project-card fade-in">
-      <div class="project-header">
-        <h3>Cache Simulator</h3>
-        <span class="project-num">04</span>
-      </div>
-      <p class="project-desc">
-        A configurable CPU cache simulator that models direct-mapped, set-associative, and fully-associative caches. The tool processes memory access traces and reports hit rates, miss rates, and eviction patterns across different cache configurations.
-      </p>
-      <div class="project-tech">
-        <span>C</span>
-        <span>Systems Programming</span>
-        <span>Computer Architecture</span>
-        <span>Performance Analysis</span>
-      </div>
-      <div class="project-details">
-        <div class="project-detail">
-          <strong>Problem</strong>
-          Cache design decisions directly impact system performance. Comparing configurations requires a tool that accurately simulates memory hierarchy behavior under realistic workloads.
-        </div>
-        <div class="project-detail">
-          <strong>What I Built</strong>
-          A command-line simulator that accepts configurable parameters — cache size, block size, associativity, replacement policy — and processes trace files to output detailed performance statistics.
-        </div>
-      </div>
-      <a href="https://github.com/danielzagaynov" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
-    </div>
-
-  </div>
-</section>
 
 <!-- ── CONTACT ── -->
 <section id="contact">
@@ -878,10 +949,10 @@
   <div class="contact-inner fade-in" style="transition-delay: 0.1s">
     <div class="contact-text">
       <p>
-        I'm actively looking for software engineering internships and open to opportunities where I can contribute to meaningful technical work.
+        I'm actively looking for engineering internships, both software-focused roles and positions that bridge software and hardware.
       </p>
       <p>
-        If you're hiring or would like to discuss a potential role, I'd be glad to hear from you. I respond to all messages within 24 hours.
+        If you're hiring or would like to discuss a potential opportunity, I'd be glad to hear from you.
       </p>
     </div>
     <div class="contact-links">
@@ -907,18 +978,15 @@
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <p>&copy; 2026 Daniel Zagaynov &middot; Built from scratch</p>
 </footer>
 
 <script>
-  // Close mobile menu
   function closeMenu() {
     document.querySelector('nav ul').classList.remove('open');
   }
 
-  // Scroll-triggered fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
